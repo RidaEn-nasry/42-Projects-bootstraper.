@@ -6,4 +6,4 @@
  
  
 # USAGE:
-  -> ./init-42.sh <project name>
+  -> ./init-42.sh [project name]
