@@ -9,13 +9,24 @@
 # store first argument in variable "project_name"
 
 # check if argument is empty 
-if [ -z "$1" ]
-then
-    echo "Please enter a project name"
-    exit 1
-fi
 
-PROJECT_NAME=$1
+# take input from user 
+
+echo "Enter project name: "
+read project_name
+echo "Enter origin url: "
+read origin_url
+echo "are u using libft: "
+read libft
+echo "are u using gnl: "
+read gnl
+echo "are u using ft_printf: "
+read ft_printf
+
+
+PROJECT_NAME= $project_name
+ORIGIN_URL= $origin_url
+
 # print project_name
 
 mkdir $PROJECT_NAME 
@@ -26,6 +37,23 @@ mkdir $PROJECT_NAME/bonus/srcs $PROJECT_NAME/bonus/includes $PROJECT_NAME/bonus/
 mkdir $PROJECT_NAME/tests/srcs $PROJECT_NAME/tests/includes $PROJECT_NAME/tests/utils
 touch $PROJECT_NAME/mandatory/srcs/main.c  $PROJECT_NAME/bonus/srcs/main_bonus.c $PROJECT_NAME/tests/srcs/main.c
 cd $PROJECT_NAME && git init
+if ($ORIGIN_URL)
+then
+    cd $PROJECT_NAME && git remote add origin $ORIGIN_URL
+fi
+
+if (( $libft == "y" | $libft == "yes" ))
+then
+    cd $PROJECT_NAME/mandatory/utils && git clone "$origin_url/libft.git"
+fi
+if (( $gnl == "y" | $gnl == "yes" ))
+then
+    cd $PROJECT_NAME/mandatory/utils && git clone "$origin_url/get_next_line.git"
+fi
+if (( $ft_printf == "y" | $ft_printf == "yes" ))
+then
+    cd $PROJECT_NAME/mandatory/utils && git clone "$origin_url/ft_printf.git"
+fi
 git add .
 git commit -m "initial commit"
 git branch dev 
